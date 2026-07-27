@@ -4,3 +4,8 @@ export interface Customer {
   email: string;
   createdAt: string;
 }
+
+export interface CreateCustomerInput {
+  name: string;
+  email: string;
+}

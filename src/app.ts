@@ -1,5 +1,5 @@
 import express from "express";
-import { listCustomers } from "./customers/customer.repository";
+import { listCustomers, createCustomer } from "./customers/customer.repository";
 
 export const app = express();
 
@@ -19,6 +19,12 @@ app.get("/customers", (_request, response) => {
   }
 
   response.status(200).json(result);
+});
+
+app.post("/customers", (request, response) => {
+  const customer = createCustomer(request.body);
+
+  response.status(201).json({ data: customer });
 });
 
 app.use((_request, response) => {
