@@ -22,9 +22,13 @@ app.get("/customers", (_request, response) => {
 });
 
 app.post("/customers", (request, response) => {
-  const customer = createCustomer(request.body);
 
-  response.status(201).json({ data: customer });
+  if (!request.body.name || !request.body.email) {
+
+    return response.status(400).json({ error: "Name or email is required" });
+  }
+  const customer = createCustomer(request.body);
+  return response.status(201).json({ data: customer });
 });
 
 app.use((_request, response) => {
