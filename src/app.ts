@@ -1,5 +1,5 @@
 import express from "express";
-import { listCustomers, createCustomer } from "./customers/customer.repository";
+import { listCustomers, createCustomer, findCustomerById } from "./customers/customer.repository";
 
 export const app = express();
 
@@ -29,6 +29,20 @@ app.post("/customers", (request, response) => {
   }
   const customer = createCustomer(request.body);
   return response.status(201).json({ data: customer });
+});
+
+app.get("/customers/:id", (request, response) => {
+  const customer = findCustomerById(request.params.id);
+
+  if (!customer) {
+    return response.status(404).json({
+      error: "Customer not found"
+    });
+  }
+
+  return response.status(200).json({
+    data: customer
+  });
 });
 
 app.use((_request, response) => {

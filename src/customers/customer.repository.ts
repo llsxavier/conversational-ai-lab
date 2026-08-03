@@ -20,3 +20,7 @@ export function createCustomer(customer: CreateCustomerInput): Customer {
 
   return newCustomer;
 }
+
+export function findCustomerById(id: string): Customer | undefined {
+  return customers.find(c => c.id === id);
+}
